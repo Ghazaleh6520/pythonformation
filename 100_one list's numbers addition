@@ -1,0 +1,13 @@
+def somme_liste(liste):
+    somme = 0
+    for element in liste:
+        somme = somme + element
+    return somme
+
+# liste
+nombres = [9, 6, 7, 13]
+
+# appel de la fonction
+resultat = somme_liste(nombres)
+
+print("La somme est :", resultat)

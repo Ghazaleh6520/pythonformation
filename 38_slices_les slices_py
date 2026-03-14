@@ -1,0 +1,4 @@
+liste=["Banane", "Abricot", "Pomme", "Ananas", "Orange", "Mangue"]
+print(liste[2:4])#de 2 à 4 ( 4 exclu)
+print(liste[:])
+print(liste[::2])#un utilisateur sur deux

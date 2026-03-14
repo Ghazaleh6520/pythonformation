@@ -1,0 +1,12 @@
+def verifier_pair_impair(n):
+    if n % 2 == 0:
+        return "Pair"
+    else:
+        return "Impair"
+
+# utilisation
+nombre = int(input("Entrez un nombre : "))
+resultat = verifier_pair_impair(nombre)
+
+print("Le nombre est :", resultat)
+

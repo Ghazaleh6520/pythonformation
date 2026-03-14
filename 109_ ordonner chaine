@@ -1,0 +1,12 @@
+chaine = "pierre _ Julien _ Anne _ Marie _ Lucien"
+
+# transformer la chaine en liste
+liste_prenoms = chaine.split(" _ ")
+
+# trier la liste
+liste_prenoms.sort()
+
+# recréer une chaine avec des virgules
+chaine_en_ordre = ", ".join(liste_prenoms)
+
+print(chaine_en_ordre)

@@ -1,0 +1,85 @@
+def afficher_grille(grille):
+    for i in range(9):
+        if i % 3 == 0 and i != 0:
+            print("-" * 21)
+        for j in range(9):
+            if j % 3 == 0 and j != 0:
+                print("|", end=" ")
+            print(grille[i][j], end=" ")
+        print()
+
+
+def trouver_case_vide(grille):
+    for ligne in range(9):
+        for colonne in range(9):
+            if grille[ligne][colonne] == 0:
+                return ligne, colonne
+    return None
+
+
+def est_valide(grille, nombre, position):
+    ligne, colonne = position
+
+    # Vérifier la ligne
+    for j in range(9):
+        if grille[ligne][j] == nombre and j != colonne:
+            return False
+
+    # Vérifier la colonne
+    for i in range(9):
+        if grille[i][colonne] == nombre and i != ligne:
+            return False
+
+    # Vérifier le carré 3x3
+    debut_ligne = (ligne // 3) * 3
+    debut_colonne = (colonne // 3) * 3
+
+    for i in range(debut_ligne, debut_ligne + 3):
+        for j in range(debut_colonne, debut_colonne + 3):
+            if grille[i][j] == nombre and (i, j) != position:
+                return False
+
+    return True
+
+
+def resoudre_sudoku(grille):
+    case_vide = trouver_case_vide(grille)
+
+    if case_vide is None:
+        return True  # Sudoku résolu
+
+    ligne, colonne = case_vide
+
+    for nombre in range(1, 10):
+        if est_valide(grille, nombre, (ligne, colonne)):
+            grille[ligne][colonne] = nombre
+
+            if resoudre_sudoku(grille):
+                return True
+
+            grille[ligne][colonne] = 0  # retour arrière
+
+    return False
+
+
+# Exemple de sudoku à résoudre
+grille = [
+    [5, 3, 0, 0, 7, 0, 0, 0, 0],
+    [6, 0, 0, 1, 9, 5, 0, 0, 0],
+    [0, 9, 8, 0, 0, 0, 0, 6, 0],
+    [8, 0, 0, 0, 6, 0, 0, 0, 3],
+    [4, 0, 0, 8, 0, 3, 0, 0, 1],
+    [7, 0, 0, 0, 2, 0, 0, 0, 6],
+    [0, 6, 0, 0, 0, 0, 2, 8, 0],
+    [0, 0, 0, 4, 1, 9, 0, 0, 5],
+    [0, 0, 0, 0, 8, 0, 0, 7, 9]
+]
+
+print("Grille avant résolution :")
+afficher_grille(grille)
+
+if resoudre_sudoku(grille):
+    print("\nGrille résolue :")
+    afficher_grille(grille)
+else:
+    print("Aucune solution trouvée.")
